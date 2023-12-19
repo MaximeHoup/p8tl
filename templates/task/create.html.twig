@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<div class="row">
+		{{ form_start(form) }}
+		{{ form_widget(form) }}
+		{% if editMode %}
+			<button type="submit" class="btn btn-success pull-right">Modifier</button>
+		{% else %}
+			<button type="submit" class="btn btn-success pull-right">Ajouter</button>
+		{% endif %}
+		{{ form_end(form) }}
+
+		<a href="{{ path('task_list') }}" class="btn btn-primary">Retour à la liste des tâches</a>
+	</div>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription
+{% endblock %}
+
+{% block body %}
+	{% if editMode %}
+		<h1>Modifier</h1>
+	{% else %}
+		<h1>Inscription</h1>
+	{% endif %}
+
+	{{ form_errors(registrationForm) }}
+
+	{{ form_start(registrationForm) }}
+	{{ form_row(registrationForm.username) }}
+	{{ form_row(registrationForm.email) }}
+	{{ form_row(registrationForm.plainPassword, {
+            label: 'Password'
+        }) }}
+
+	{% if editMode %}
+		<button type="submit" class="btn">Modifier</button>
+	{% else %}
+		<button type="submit" class="btn">S'inscrire</button>
+	{% endif %}
+	{{ form_end(registrationForm) }}
+{% endblock %}
