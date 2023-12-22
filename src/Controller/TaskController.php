@@ -29,7 +29,10 @@ class TaskController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
+            if ($task->getId() == null) {
+                /** @phpstan-ignore-next-line */
+                $task->setUser($this->getUser());
+            }
             $entityManager->persist($task);
             $entityManager->flush();
 
