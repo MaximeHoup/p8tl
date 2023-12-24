@@ -6,9 +6,9 @@ use App\Entity\Task;
 use App\Form\TaskFormType;
 use App\Repository\TaskRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 
 class TaskController extends AbstractController
 {
@@ -29,23 +29,24 @@ class TaskController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            if ($task->getId() == null) {
-                /** @phpstan-ignore-next-line */
+            if (null == $task->getId()) {
+                /* @phpstan-ignore-next-line */
                 $task->setUser($this->getUser());
             }
             $entityManager->persist($task);
             $entityManager->flush();
 
-            if ($task->getId() !== null) {
+            if (null !== $task->getId()) {
                 $this->addFlash('success', 'La tâche a été bien été modifiée.');
             } else {
                 $this->addFlash('success', 'La tâche a été bien été ajoutée.');
             }
+
             return $this->redirectToRoute('task_list');
         }
 
         return $this->render('task/create.html.twig', [
-            'editMode' => $task->getId() !== null,
+            'editMode' => null !== $task->getId(),
             'form' => $form->createView(),
             'task' => $task,
         ]);
