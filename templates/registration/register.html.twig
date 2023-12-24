@@ -18,6 +18,7 @@
 	{{ form_row(registrationForm.password, {
             label: 'Password'
         }) }}
+	{{ form_row(registrationForm.roles)}}
 
 	{% if editMode %}
 		<button type="submit" class="btn">Modifier</button>

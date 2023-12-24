@@ -35,16 +35,17 @@ class RegistrationController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            if ($user->getId() !== null) {
+            if (null !== $user->getId()) {
                 $this->addFlash('success', "L'utilisateur a bien été modifié.");
             } else {
                 $this->addFlash('success', "L'utilisateur a bien été ajouté.");
             }
+
             return $this->redirectToRoute('user_list');
         }
 
         return $this->render('registration/register.html.twig', [
-            'editMode' => $user->getId() !== null,
+            'editMode' => null !== $user->getId(),
             'registrationForm' => $form->createView(),
         ]);
     }
