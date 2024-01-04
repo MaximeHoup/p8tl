@@ -33,13 +33,13 @@ class RegistrationController extends AbstractController
             );
 
             $entityManager->persist($user);
-            $entityManager->flush();
 
             if (null !== $user->getId()) {
                 $this->addFlash('success', "L'utilisateur a bien été modifié.");
             } else {
                 $this->addFlash('success', "L'utilisateur a bien été ajouté.");
             }
+            $entityManager->flush();
 
             return $this->redirectToRoute('user_list');
         }

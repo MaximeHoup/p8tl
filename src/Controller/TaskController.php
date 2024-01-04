@@ -35,13 +35,13 @@ class TaskController extends AbstractController
                 $task->setUser($this->getUser());
             }
             $entityManager->persist($task);
-            $entityManager->flush();
 
             if (null !== $task->getId()) {
                 $this->addFlash('success', 'La tâche a été bien été modifiée.');
             } else {
                 $this->addFlash('success', 'La tâche a été bien été ajoutée.');
             }
+            $entityManager->flush();
 
             return $this->redirectToRoute('task_list');
         }
